@@ -1,5 +1,43 @@
 <div class="container">
     <div class="row">
-        {{basic}}
+        <h2 class="h2">{{username}}</h2>
+        <!--<button class="btn-info"> Dodaj</button>-->
     </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <label for="sel1">Lista użytkownika:</label>
+            <select class="form-control" id="sel1" ng-model="username">
+                <option ng-repeat="u in users">{{u}}</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <label for="slist">Lista zakupów:</label>
+            <div class="list-group" id="slist">
+                <div class="row list-group-item" ng-repeat="l in shoppingList[username]">
+                    <p class="col-md-4">{{l}}</p> | <strong>Wykonano: </strong><input type="checkbox"
+                                                                                      ng-click="moveToArchive(username, $index)">
+                </div>
+            </div>
+
+            <form ng-submit="addNewTask()" class=" col-lg-col-md-4">
+            <div class="form-group">
+            <label for="p_name">Nazwa produktu: </label>
+            <input type="text" id="p_name" ng-model="task">
+            <button class="btn-sm btn-success" type="submit" name="submit">Dodaj</button>
+            </div>
+            </form>
+        </div>
+        <div class="col-lg-4" ng-show="archive[username] !== undefined || archive[username] !=null">
+            <label>Archiwum zadań</label>
+            <div class="list-group">
+                <div class="row list-group-item" ng-repeat="l in archive[username]">
+                    <p class="col-md-4">{{l}} |</p>
+                    <button class="btn-sm btn-warning" ng-click="addToShoppingList($index)">Przywróć zadanie
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </div>
