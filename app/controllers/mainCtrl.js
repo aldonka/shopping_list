@@ -12,6 +12,17 @@ angular.module('myApp')
             kasia : ['mąka', 'pomidory', 'mleko'],
             konfacela : ['orzechy']
         };
+        $scope.listColor = function () {
+            var color = '';
+            if($scope.shoppingList[$scope.username].length <= 3){
+                color = 'panel panel-danger';
+            }else  if($scope.shoppingList[$scope.username].length > 3 && $scope.shoppingList[$scope.username].length < 5){
+                color = 'panel panel-info';
+            }else{
+                color = 'panel  panel-success';
+            }
+            return color;
+        };
 
         $scope.moveToArchive = function (username, index) {
             if($scope.archive[username] === undefined){

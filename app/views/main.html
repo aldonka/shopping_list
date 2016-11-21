@@ -11,20 +11,22 @@
             </select>
         </div>
         <div class="col-lg-4">
-            <label for="slist">Lista zakupów:</label>
-            <div class="list-group" id="slist">
-                <div class="row list-group-item" ng-repeat="l in shoppingList[username]">
-                    <p class="col-md-4">{{l}}</p> | <strong>Wykonano: </strong><input type="checkbox"
-                                                                                      ng-click="moveToArchive(username, $index)">
+            <div ng-class="listColor()">
+                <div class="panel-heading" for="slist">Lista zakupów:</div>
+                <div class="panel-body list-group" id="slist">
+                    <div class="row list-group-item" ng-repeat="l in shoppingList[username]">
+                        <p class="col-md-4">{{l}}</p> | <strong>Wykonano: </strong><input type="checkbox"
+                                                                                          ng-click="moveToArchive(username, $index)">
+                    </div>
                 </div>
             </div>
 
             <form ng-submit="addNewTask()" class=" col-lg-col-md-4">
-            <div class="form-group">
-            <label for="p_name">Nazwa produktu: </label>
-            <input type="text" id="p_name" ng-model="task">
-            <button class="btn-sm btn-success" type="submit" name="submit">Dodaj</button>
-            </div>
+                <div class="form-group">
+                    <label for="p_name">Nazwa produktu: </label>
+                    <input type="text" id="p_name" ng-model="task">
+                    <button class="btn-sm btn-success" type="submit" name="submit">Dodaj</button>
+                </div>
             </form>
         </div>
         <div class="col-lg-4" ng-show="archive[username] !== undefined || archive[username] !=null">
