@@ -2,11 +2,15 @@
     <div class="row">
         <h2 class="h2">{{username | uppercase}}</h2>
         <!--<button class="btn-info"> Dodaj</button>-->
+        <strong class="text-info">Zadania wykonane: {{archivedTaskSize}}</strong>
+        <strong class="text-info">Zadania do wykonania: {{activeTaskSize}}</strong>
     </div>
     <div class="row">
         <div class=" col-lg-2">
             <div class="panel panel-info">
-                <div class="panel-heading">Lista użytkownika</div>
+                <div class="panel-heading">
+                    Lista użytkownika
+                </div>
                 <div class="panel-body">
                     <select class="form-control" ng-model="username">
                         <option ng-repeat="u in users()">{{u}}</option>
@@ -16,25 +20,36 @@
         </div>
         <div class="col-lg-6">
             <div ng-class="listColor()">
-                <div class="panel-heading" for="slist">Lista zakupów</div>
+                <div class="panel-heading" for="slist">
+                    <strong class="col-lg-4"> Lista zakupów</strong>
+                    <form class=" form-inline">
+                        <input class=" input-sm form-control" type="date" placeholder="dane od: "/>
+                        <input class="input-sm form-control" type="date" placeholder="dane do: "/>
+                    </form>
+                </div>
                 <div class="panel-body list-group" id="slist">
-                    <div ng-hide="usersTmp[userIndex].archived[$index]" class="row list-group-item"
-                         ng-repeat="l in usersTmp[userIndex].tasks">
-                        <p class="pull-right">{{l }} dodano : {{usersTmp[userIndex].dates[$index] | date :
+                    <div ng-hide="usersTmp[userIndex].archived[i]" class="row list-group-item"
+                         ng-repeat="i in shoppingList">
+                        <p class="pull-right">{{usersTmp[userIndex].tasks[i] }} dodano : {{usersTmp[userIndex].dates[i]
+                            | date :
                             'yyyy-MM-dd HH:mm'}} |
-                            <strong>Wykonano: </strong><input type="checkbox" ng-click="moveToArchive(username, $index)"
-                                                              ng-checked="usersTmp[userIndex].checked[$index]">
+                            <strong>Wykonano: </strong><input type="checkbox" ng-click="moveToArchive(username, i)"
+                                                              ng-checked="usersTmp[userIndex].checked[i] ">
                     </div>
                 </div>
+                <ul class="pagination col-lg-push-3">
+                    <li ng-repeat="p in [].constructor(paginatorLength) track by $index"><a ng-click="nextSite($index)">{{$index+1}} </a>
+                    </li>
+                </ul>
             </div>
 
             <div class="panel panel-info">
                 <div class="panel-heading">Dodaj produkt</div>
                 <div class="panel-body">
                     <form ng-submit="addNewTask()" class=" col-lg-col-md-4">
-                        <div class="form-group">
+                        <div class="form-inline">
                             <label for="p_name">Nazwa produktu: </label>
-                            <input type="text" id="p_name" ng-model="task">
+                            <input type="text" class=" form-control" id="p_name" ng-model="task">
                             <button class="btn btn-sm btn-success" type="submit" name="submit">Dodaj</button>
                         </div>
                     </form>
@@ -55,10 +70,12 @@
                 <div ng-show="showArchive" class="panel-body list-group">
                     <div ng-show="usersTmp[userIndex].archived[$index]" class="row list-group-item"
                          ng-repeat="l in usersTmp[userIndex].tasks">
-                        <p class="col-md-4">{{l}} | data : {{usersTmp[userIndex].dates[$index] | date :
-                            'yyyy-MM-dd'}} </p>
-                        <button class="btn btn-warning" ng-click="addToShoppingList($index)">Przywróć zadanie
-                        </button>
+                        <div >
+                            <p class="pull-left">{{l}} | data : {{usersTmp[userIndex].dates[$index] | date :'yyyy-MM-dd'}} </p>
+                            <button class="btn btn-sm btn-warning pull-right" ng-click="addToShoppingList($index)">Przywróć zadanie
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 

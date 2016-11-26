@@ -1,6 +1,6 @@
 'use strict';
 angular.module('myApp', [
-  'ngRoute', 'ngResource', 'ngAnimate'
+  'ngRoute', 'ngResource', 'ngAnimate', 'PaginatorService'
 ]).
 config([ '$routeProvider', function( $routeProvider) {
   $routeProvider
