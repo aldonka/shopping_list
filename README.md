@@ -1,1 +1,1 @@
-# Template for AngularJS
+# AngularJS - shopping list
